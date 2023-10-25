@@ -56,6 +56,7 @@ const previousEl = document.getElementById('previous');
 const questionEl = document.getElementById('question');
 const optionsEl = document.getElementById('options');
 const scoreEl = document.getElementById('score');
+const playAgainEl = document.getElementById('play-again');
 
 let score = 0;
 let currentQuestion = 0;
@@ -65,14 +66,27 @@ nextEl.addEventListener('click', ()=>{
   scoreEl.textContent = `Score: ${score} / ${totalScore}`;
   nextQuestions();
 });
+
 previousEl.addEventListener('click', ()=>{
   scoreEl.textContent = `Score: ${score} / ${totalScore}`;
   previousQuestions();
 });
 
+playAgainEl.addEventListener('click', ()=>{
+  if(currentQuestion===quesJSON.length){
+    score = 0;
+    currentQuestion = 0;
+    scoreEl.textContent = `Score: ${score} / ${totalScore}`;
+    showQuestions();
+  }
+})
+
 showQuestions();
 
 function showQuestions(){
+  playAgainEl.style.display = 'none';
+  previousEl.style.display = 'block';
+  nextEl.style.display = 'block';
   const {correctAnswer, options, question} = quesJSON[currentQuestion];
   // Set the question text content
   questionEl.textContent = question;
@@ -106,6 +120,7 @@ function nextQuestions(){
     optionsEl.textContent = '';
     previousEl.style.display = 'none';
     nextEl.style.display = 'none';
+    playAgainEl.style.display = 'block';
   }
   else{
     showQuestions();
@@ -132,4 +147,6 @@ function shuffleOptions(options){
   }
   return options;
 }
+
+
 
