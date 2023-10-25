@@ -65,7 +65,10 @@ nextEl.addEventListener('click', ()=>{
   scoreEl.textContent = `Score: ${score} / ${totalScore}`;
   nextQuestions();
 });
-previousEl.addEventListener('click', previousQuestions);
+previousEl.addEventListener('click', ()=>{
+  scoreEl.textContent = `Score: ${score} / ${totalScore}`;
+  previousQuestions();
+});
 
 showQuestions();
 
@@ -89,7 +92,7 @@ function showQuestions(){
       else {
         score -= 0.25;
       }
-      scoreEl.textContent = `Score: ${score}`;
+      scoreEl.textContent = `Score: ${score} / ${totalScore}`;
       nextQuestions();
     });
   });
